@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
+    <title>Site de Gantt</title>
+</head>
+<body>
+    <nav>
+        <h4>Site test</h4>
+        <ul>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/connexion">Connexion</a></li>
+            <li><a href="/inscrire">S'inscrire</a></li>
+        </ul>
+    </nav>
+
+    <div class="alert alert-danger text-center" role="alert">
+    Le site est en cours de construction !
+    </div>
+
+    <p class="h1 text-center">Le diagramme de Gantt</p>
+    <hr />
+
+    <head>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+
+            google.charts.load('current', {'packages':['gantt']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function daysToMilliseconds(days) {
+            return days * 24 * 60 * 60 * 1000;
+            }
+
+            function drawChart() {
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Task ID');
+            data.addColumn('string', 'Task Name');
+            data.addColumn('string', 'Resource');
+            data.addColumn('date', 'Start Date');
+            data.addColumn('date', 'End Date');
+            data.addColumn('number', 'Duration');
+            data.addColumn('number', 'Percent Complete');
+            data.addColumn('string', 'Dependencies');
+
+            data.addRows([
+                ['Etape_1', 'Entretien motivation', 'write',
+                new Date(2022, 9, 20), new Date(2022, 9, 21), null,  100,  null],
+                ['Etape_2', 'Test technique', 'white',
+                new Date(2022, 9, 21), new Date(2022, 10, 9), null, 100, 'Etape_1'],
+                ['Tech_1', 'Tuto youtube', 'white',
+                new Date(2022, 9, 21), new Date(2022, 9, 22), null, 100, null],
+                ['Tech_2', 'Mise en place du site', 'white',
+                new Date(2022, 9, 23), new Date(2022, 9, 27), null, 100, 'Tech_1'],
+                ['Test_1', 'Test du site', 'white',
+                new Date(2022, 9, 26), new Date(2022, 9, 30), null, 100, 'Tech_2'],
+                ['Tech_3', 'Ajout du système d authentification', 'white',
+                new Date(2022, 9, 30), new Date(2022, 10, 2), null, 100, 'Test_1'],
+                ['Test_2', 'Test du site 2', 'white',
+                new Date(2022, 10, 2), new Date(2022, 10, 5), null, 100, 'Tech_3'],
+                ['Tech_4', 'Modifications et vérifications complémentaires', 'white',
+                new Date(2022, 10, 5), new Date(2022, 10, 9), null, 100, 'Test_2'],
+                ['Etape_3', 'Entretien technique', 'summer',
+                new Date(2022, 10, 10), new Date(2022, 10, 11), null, 0, 'Etape_2']
+            ]);
+
+            var options = {
+                height: 650
+            };
+
+            var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+
+            chart.draw(data, options);
+            }
+        </script>
+    </head>
+    <body>
+        <div id="chart_div"></div>
+    </body>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+</body>
+</html>

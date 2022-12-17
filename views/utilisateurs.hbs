@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
+    <title>Site de Gantt</title>
+</head>
+<body>
+    <nav>
+        <h4>Site test</h4>
+        <ul>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/profil">Profil</a></li>
+            <li><a href="/utilisateurs">Utilisateurs</a></li>
+            <li><a href="/auth/deconnexion">Déconnexion</a></li>
+        </ul>
+    </nav>
+
+    <h1>Voici la liste des utilisateurs crées sur le site :</h1>
+
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Email</th>
+                <th scope="col">Éditer</th>
+            </tr>
+        </thead>
+    {{#each data}}
+        <tbody>
+            <tr>
+                <th scope="row">{{this.id}}</th>
+                <td>{{this.nom}}</td>
+                <td>{{this.prenom}}</td>
+                <td>{{this.email}}</td>
+                <td><form action="/edit/{{this.id}}" method="put">
+                    <button>Editer</button>
+                </form></td>
+            </tr>
+        </tbody>
+    {{/each}}
+    </table>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+</body>
+</html>
